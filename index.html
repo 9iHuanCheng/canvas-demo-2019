@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello, My Canvas</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <canvas id='xxx' width=300 height=300></canvas>
+  <div id=actions class="actions">
+    <button id=eraser>橡皮擦</button>
+    <button id=brush>画笔</button>
+  </div>
+  <script src="./main.js"></script>
+</body>
+<!-- 最开始的js
+<script>
+  var yyy = document.getElementById('xxx');
+  var context = yyy.getContext('2d');
+
+  init();
+
+  window.onresize = function(){
+    init();
+  }
+
+  function init(){
+    var pageWidth = document.documentElement.clientWidth;
+    var pageHeight = document.documentElement.clientHeight;
+    yyy.width = pageWidth;
+    yyy.height = pageHeight;
+  }
+/*********上方为初始化canvas宽高************* */
+/*
+context.fillStyle = 'red';
+context.fillRect(10, 10, 100, 100);
+绘制矩形的描边，可以先描边在填充，也可以先填充再描边
+stroke表示只描边，不填充
+fill才进行填充
+context.strokeStyle = 'blue'
+context.strokeRect(10, 10, 100, 100);
+//清除一部分区域，橡皮擦；
+context.clearRect(50, 50, 10, 10);/*50为位置，10为范围 */
+/*
+context.fillStyle = 'blue';
+context.beginPath();//开始绘制三角形
+context.moveTo(240, 240);
+context.lineTo(300, 240);
+context.lineTo(300, 300);
+context.fill();*/
+
+  var using = false;
+  var lastPoint = {
+    x: undefined, 
+    y: undefined
+  };
+  yyy.onmousedown = function(random){
+    let x = random.clientX;
+  //这里的x,y是相对于视口的位置
+    let y = random.clientY;
+    if(eraserEnabled){
+      using = true;
+      context.clearRect(x - 5, y - 5, 10, 10);
+    }  else {
+      using = true;
+      lastPoint = {'x': x, 'y': y};
+  // drawCircle(x, y, 1);
+      }
+  };
+  yyy.onmousemove = function(random){
+    let x = random.clientX;
+    let y = random.clientY;
+    if(eraserEnabled){
+      if(using){//检查是否在使用橡皮擦
+        context.clearRect(x - 5, y - 5, 10, 10);
+      }
+    } else {
+      if(using){
+        let newPoint = {'x': x, 'y': y};
+      // drawCircle(x, y, 1);
+        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
+        lastPoint = newPoint;
+        }
+      }
+  };
+  yyy.onmouseup = function(random){
+    using = false;
+  };
+/*
+// drawCircle(150, 150, 50);
+function drawCircle(x ,y, radius){
+  context.beginPath();
+  context.fillStyle = 'black';
+  context.arc(x, y, radius, 0, Math.PI*2);
+  context.fill();
+}*/
+
+  function drawLine(x1, y1, x2, y2){
+    context.beginPath();
+    context.strokeStyle = 'black';
+    context.moveTo(x1, y1);//起点
+  // context.lineWidth = 5;
+    context.lineTo(x2, y2);//终点
+    context.stroke();
+    context.closePath();
+  };
+
+/*//画线
+context.beginPath();
+context.moveTo(30, 30);//起点
+context.lineWidth = 5;
+context.lineTo(200, 30);//终点
+context.stroke();
+context.closePath();*/
+/************************ */
+
+  var eraserEnabled = false;
+  eraser.onclick = function(){
+    eraserEnabled = !eraserEnabled;
+  };
+</script> -->
+</html>
