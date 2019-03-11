@@ -6,7 +6,7 @@ atuoSetCanvasSize(yyy);
 
 /*****/
 //2、进行操作
-listenToMouse(yyy);
+listenToUser(yyy);
 
 //3、使用橡皮擦
 var eraserEnabled = false;
@@ -45,38 +45,69 @@ function drawLine(x1, y1, x2, y2){
   context.closePath();
 };
 
-function listenToMouse(canvas){
+function listenToUser(canvas){
   var using = false;
   var lastPoint = {
     x: undefined, 
     y: undefined
   };
-
-  canvas.onmousedown = function(random){
-    let x = random.clientX;
-  //这里的x,y是相对于视口的位置
-    let y = random.clientY;
-    using = true;
-    if(eraserEnabled){
-      context.clearRect(x - 5, y - 5, 10, 10);
-    }  else {
-      lastPoint = {'x': x, 'y': y};
-      }
-  };
-  canvas.onmousemove = function(random){
-    let x = random.clientX;
-    let y = random.clientY;
-    //检查是否在使用橡皮擦
-    if(!using){return;}
-    if(eraserEnabled){
+  //特性检测
+  if(document.body.ontouchstart !== undefined){
+    //触屏设备
+    canvas.ontouchstart = function(random){
+      let x = random.touches[0].clientX;
+      let y = random.touches[0].clientY;
+      using = true;
+      if(eraserEnabled){
         context.clearRect(x - 5, y - 5, 10, 10);
-    } else {
-        let newPoint = {'x': x, 'y': y};
-        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
-        lastPoint = newPoint;
-      }
-  };
-  canvas.onmouseup = function(random){
-    using = false;
-  };
+      }  else {
+        lastPoint = {'x': x, 'y': y};
+        }
+    };
+    canvas.ontouchmove = function(random){
+      let x = random.touches[0].clientX;
+      let y = random.touches[0].clientY;
+      if(!using){return;}
+      if(eraserEnabled){
+          context.clearRect(x - 5, y - 5, 10, 10);
+      } else {
+          let newPoint = {'x': x, 'y': y};
+          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
+          lastPoint = newPoint;
+        }
+    };
+    canvas.ontouchend = function(){
+      using = false;
+    };
+  } else {
+    //非触屏设备
+    canvas.onmousedown = function(random){
+      let x = random.clientX;
+    //这里的x,y是相对于视口的位置
+      let y = random.clientY;
+      using = true;
+      if(eraserEnabled){
+        context.clearRect(x - 5, y - 5, 10, 10);
+      }  else {
+        lastPoint = {'x': x, 'y': y};
+        }
+      };
+    canvas.onmousemove = function(random){
+      let x = random.clientX;
+      let y = random.clientY;
+      //检查是否在使用橡皮擦
+      if(!using){return;}
+      if(eraserEnabled){
+          context.clearRect(x - 5, y - 5, 10, 10);
+      } else {
+          let newPoint = {'x': x, 'y': y};
+          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
+          lastPoint = newPoint;
+        }
+      };
+    canvas.onmouseup = function(random){
+      using = false;
+      };
+  }
+  
 }
