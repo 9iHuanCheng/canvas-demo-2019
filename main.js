@@ -1,6 +1,7 @@
 //1、初始化canvas宽高
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');
+lineWidth = 5;
 
 atuoSetCanvasSize(yyy);
 
@@ -20,13 +21,27 @@ eraser.onclick = function(){
   eraser.classList.add('active');
   pen.classList.remove('active');
 };
+clear.onclick = function(){
+  context.clearRect(0, 0, yyy.width, yyy.height);
+};
+download.onclick = function(){
+  var url = yyy.toDataURL("image/png");
+  console.log(url);
+  var a = document.createElement('a');
+  document.body.appendChild(a);
+  a.href = url;
+  a.background = 'white';
+  a.download = '我的画儿';
+  a.target = '_blank';
+  a.click();
+};
 black.onclick = function(){
   context.strokeStyle = 'black';
   black.classList.add('active');
   red.classList.remove('active');
   green.classList.remove('active');
   blue.classList.remove('active');
-}
+}; 
 red.onclick = function(){
   context.strokeStyle = 'red';
   red.classList.add('active');
@@ -48,6 +63,12 @@ blue.onclick = function(){
   red.classList.remove('active');
   green.classList.remove('active');
 };
+thin.onclick = function(){
+  lineWidth = 5;
+}
+thick.onclick = function(){
+  lineWidth = 8;
+}
 /****************** */
 
 function atuoSetCanvasSize(canvas){
@@ -68,6 +89,7 @@ function atuoSetCanvasSize(canvas){
 function drawLine(x1, y1, x2, y2){
   context.beginPath();
   context.moveTo(x1, y1);//起点
+  context.lineWidth = lineWidth;
   context.lineTo(x2, y2);//终点
   context.stroke();
   context.closePath();

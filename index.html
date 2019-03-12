@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <title>Hello, My Canvas</title>
   <link rel="stylesheet" href="./style.css">
-  <script src="//at.alicdn.com/t/font_1082445_rdzwot43j7.js"></script>
+  <script src="//at.alicdn.com/t/font_1082445_lrj6o5x5vs.js"></script>
 </head>
 <body>
   <canvas id='xxx' width=300 height=300></canvas>
@@ -17,12 +17,22 @@
     <svg id=eraser class="icon">
         <use xlink:href="#icon-eraser"></use>
     </svg>
+    <svg id=clear class="icon">
+        <use xlink:href="#icon-clear"></use>
+    </svg>
+    <svg id=download class="icon">
+        <use xlink:href="#icon-save"></use>
+    </svg>
   </div>
   <ol class="colors">
     <li id=black class="black active"></li>
     <li id=red class="red"></li>
     <li id=green class="green"></li>
     <li id=blue class="blue"></li>
+  </ol>
+  <ol class="sizes">
+    <li id="thin" class="thin"></li>
+    <li id="thick" class="thick"></li>
   </ol>
   <script src="./main.js"></script>
 </body>
