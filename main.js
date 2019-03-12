@@ -30,7 +30,6 @@ download.onclick = function(){
   var a = document.createElement('a');
   document.body.appendChild(a);
   a.href = url;
-  a.background = 'white';
   a.download = '我的画儿';
   a.target = '_blank';
   a.click();

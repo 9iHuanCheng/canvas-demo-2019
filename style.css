@@ -12,7 +12,8 @@ ul, ol{
   overflow: hidden;
 }
 #xxx{
-  background-color: bisque;
+  /*最初的颜色设置 background-color: bisque; */
+  background-color: transparent;
   display: block;
   position: fixed;
   top: 0;
