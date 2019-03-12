@@ -6,13 +6,24 @@
   <meta charset="UTF-8">
   <title>Hello, My Canvas</title>
   <link rel="stylesheet" href="./style.css">
+  <script src="//at.alicdn.com/t/font_1082445_rdzwot43j7.js"></script>
 </head>
 <body>
   <canvas id='xxx' width=300 height=300></canvas>
   <div id=actions class="actions">
-    <button id=eraser>橡皮擦</button>
-    <button id=brush>画笔</button>
+    <svg id=pen class="active icon">
+        <use xlink:href="#icon-pen"></use>
+    </svg>
+    <svg id=eraser class="icon">
+        <use xlink:href="#icon-eraser"></use>
+    </svg>
   </div>
+  <ol class="colors">
+    <li id=black class="black active"></li>
+    <li id=red class="red"></li>
+    <li id=green class="green"></li>
+    <li id=blue class="blue"></li>
+  </ol>
   <script src="./main.js"></script>
 </body>
 <!-- 最开始的js

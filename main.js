@@ -10,15 +10,44 @@ listenToUser(yyy);
 
 //3、使用橡皮擦
 var eraserEnabled = false;
+pen.onclick = function(){
+  eraserEnabled = false;
+  pen.classList.add('active');
+  eraser.classList.remove('active');
+};
 eraser.onclick = function(){
   eraserEnabled = true;
-  actions.className = 'actions x';
+  eraser.classList.add('active');
+  pen.classList.remove('active');
 };
-brush.onclick = function(){
-  eraserEnabled = false;
-  actions.className = 'actions';
+black.onclick = function(){
+  context.strokeStyle = 'black';
+  black.classList.add('active');
+  red.classList.remove('active');
+  green.classList.remove('active');
+  blue.classList.remove('active');
 }
-
+red.onclick = function(){
+  context.strokeStyle = 'red';
+  red.classList.add('active');
+  black.classList.remove('active');
+  green.classList.remove('active');
+  blue.classList.remove('active');
+};
+green.onclick = function(){
+  context.strokeStyle = 'green';
+  green.classList.add('active');
+  black.classList.remove('active');
+  blue.classList.remove('active');
+  red.classList.remove('active');
+};
+blue.onclick = function(){
+  context.strokeStyle = 'blue';
+  blue.classList.add('active');
+  black.classList.remove('active');
+  red.classList.remove('active');
+  green.classList.remove('active');
+};
 /****************** */
 
 function atuoSetCanvasSize(canvas){
@@ -38,7 +67,6 @@ function atuoSetCanvasSize(canvas){
 
 function drawLine(x1, y1, x2, y2){
   context.beginPath();
-  context.strokeStyle = 'black';
   context.moveTo(x1, y1);//起点
   context.lineTo(x2, y2);//终点
   context.stroke();
@@ -109,5 +137,4 @@ function listenToUser(canvas){
       using = false;
       };
   }
-  
 }
